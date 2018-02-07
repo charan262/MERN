@@ -6,11 +6,14 @@ app.get('/auth/google',
     })
 );
 app.get('/auth/google/callback',
-    passport.authenticate('google')
+    passport.authenticate('google'),
+    (req,res)=>{
+        res.redirect('/surveys')
+    }
 );
 app.get('/api/logout',(req,res)=>{
     req.logout();
-    res.send("no longer valid")
+    res.redirect('/')
 })
 app.get('/api/current_user',(req,res)=>{
     res.send(req.user)
